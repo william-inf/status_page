@@ -14,4 +14,6 @@
     </root>
 
     <logger name="as.thomwilliam" level="debug"/>
+    <logger name="io.micronaut.http.client" level="debug" />
+
 </configuration>

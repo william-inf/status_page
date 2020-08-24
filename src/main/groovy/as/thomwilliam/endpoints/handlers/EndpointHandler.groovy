@@ -1,9 +1,8 @@
-package as.thomwilliam.endpoints
+package as.thomwilliam.endpoints.handlers
 
 import as.thomwilliam.conf.UrlEntry
-import groovy.util.logging.Slf4j
+import as.thomwilliam.endpoints.EndpointAuthenticationType
 
-@Slf4j
 interface EndpointHandler {
 
     Map callEndpoint(final UrlEntry urlEntry)
