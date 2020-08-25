@@ -4,8 +4,6 @@ import as.thomwilliam.conf.UrlEntry
 import as.thomwilliam.conf.UrlStatusResult
 import as.thomwilliam.utils.api.handlers.EndpointHandler
 import as.thomwilliam.utils.api.handlers.EndpointHandlerFactory
-import as.thomwilliam.utils.api.handlers.UnauthenticatedEndpointHandler
-import as.thomwilliam.utils.api.handlers.client.UnauthenticatedLowLevelClient
 import groovy.util.logging.Slf4j
 import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
@@ -18,7 +16,7 @@ import java.util.function.Supplier
 @Singleton
 class StatusService {
 
-    @Inject UnauthenticatedEndpointHandler handler
+    @Inject EndpointHandlerFactory handlerFactory
 
     Maybe<UrlStatusResult> fetchResult(final UrlEntry entry) {
         log.info("Looking up status result for url ${entry.name}")
@@ -29,7 +27,8 @@ class StatusService {
     }
 
     private Supplier<UrlStatusResult> callUrlEntry(UrlEntry entry) {
-//        EndpointHandler handler = EndpointHandlerFactory.forType(entry.type)
+        EndpointHandler handler = handlerFactory.forType(entry.type)
+
         return () -> {
             handler.callEndpoint(entry)
         }

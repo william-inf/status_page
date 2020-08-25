@@ -4,12 +4,9 @@ import as.thomwilliam.conf.UrlEntry
 import as.thomwilliam.conf.UrlStatusResult
 import as.thomwilliam.utils.api.EndpointAuthenticationType
 import as.thomwilliam.utils.api.handlers.client.UnauthenticatedLowLevelClient
-import as.thomwilliam.utils.api.handlers.conf.UnauthenticatedEndpointConfiguration
 import groovy.util.logging.Slf4j
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.client.exceptions.HttpClientResponseException
-
-import javax.inject.Inject
 import javax.inject.Singleton;
 
 @Singleton
@@ -39,5 +36,7 @@ class UnauthenticatedEndpointHandler implements EndpointHandler {
     EndpointAuthenticationType getEndpointType() {
         return EndpointAuthenticationType.Unauthenticated
     }
+
+
 
 }
