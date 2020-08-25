@@ -1,27 +1,32 @@
 package as.thomwilliam.status
 
 import as.thomwilliam.conf.ConfigManager
-import as.thomwilliam.utils.JSONUtils
-import groovy.transform.CompileStatic
-import io.micronaut.http.MediaType
+import as.thomwilliam.conf.UrlEntry
+import as.thomwilliam.conf.UrlStatusResult
+import as.thomwilliam.endpoints.EndpointService
+import groovy.util.logging.Slf4j
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Produces
-import io.reactivex.Maybe
+import io.reactivex.Single
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 import javax.inject.Inject
 
-@CompileStatic
+@Slf4j
 @Controller("/status")
 class StatusController {
 
+    @Inject EndpointService endpointService
+    @Inject StatusService statusService
     @Inject ConfigManager configManager
 
     @Get("/")
-    @Produces(MediaType.TEXT_JSON)
-    Maybe<String> index() {
-        return Maybe.just(JSONUtils.toJson(configManager.urls))
+    Single<List<UrlStatusResult>> status() {
+        log.info("Controller action /status called ...")
+        return Observable.fromIterable(configManager.urls)
+                .flatMap { UrlEntry entry -> statusService.fetchResult(entry).toObservable() }
+                .toList() as Single<List<UrlStatusResult>>
     }
-
 
 }

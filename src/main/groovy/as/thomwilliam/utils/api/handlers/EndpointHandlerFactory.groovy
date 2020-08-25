@@ -1,7 +1,7 @@
-package as.thomwilliam.endpoints.handlers
+package as.thomwilliam.utils.api.handlers
 
 import as.thomwilliam.conf.UrlEntry
-import as.thomwilliam.endpoints.EndpointAuthenticationType
+import as.thomwilliam.utils.api.EndpointAuthenticationType
 import groovy.util.logging.Slf4j
 
 @Slf4j
@@ -14,15 +14,15 @@ class EndpointHandlerFactory {
         registerHandler(new BasicAuthenticatedEndpointHandler())
     }
 
-    Map call(final UrlEntry entry) throws RuntimeException {
-        log.debug("Calling URL entrypoint - ${entry.addr}")
-        EndpointHandler handler = _endpointHandlers[entry.type]
+    static EndpointHandler forType(final EndpointAuthenticationType type) throws RuntimeException {
+        log.debug("Retrieving handler for type ${type}")
+        EndpointHandler handler = _endpointHandlers[type]
 
         if (!handler) {
-            throw new RuntimeException("Missing handler for endpoint authentication type - ${entry.type}")
+            throw new RuntimeException("Missing handler for endpoint authentication type - ${type}")
         }
 
-        return handler.callEndpoint(entry)
+        return handler
     }
 
     private static void registerHandler(EndpointHandler handler) {

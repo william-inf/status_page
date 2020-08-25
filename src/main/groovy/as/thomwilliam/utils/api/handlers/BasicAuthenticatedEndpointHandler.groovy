@@ -1,12 +1,13 @@
-package as.thomwilliam.endpoints.handlers
+package as.thomwilliam.utils.api.handlers
 
 import as.thomwilliam.conf.UrlEntry
-import as.thomwilliam.endpoints.EndpointAuthenticationType
+import as.thomwilliam.conf.UrlStatusResult
+import as.thomwilliam.utils.api.EndpointAuthenticationType
 
 class BasicAuthenticatedEndpointHandler implements EndpointHandler {
 
     @Override
-    Map callEndpoint(UrlEntry urlEntry) {
+    UrlStatusResult callEndpoint(UrlEntry urlEntry) {
         return null
     }
 

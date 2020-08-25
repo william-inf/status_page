@@ -1,4 +1,4 @@
-package as.thomwilliam.endpoints
+package as.thomwilliam.utils.api
 
 enum EndpointAuthenticationType {
     Unauthenticated, Basic

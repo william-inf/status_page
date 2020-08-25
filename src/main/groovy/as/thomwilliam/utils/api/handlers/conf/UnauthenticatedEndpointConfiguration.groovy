@@ -1,7 +1,6 @@
-package as.thomwilliam.endpoints.handlers.conf
+package as.thomwilliam.utils.api.handlers.conf
 
 import as.thomwilliam.conf.UrlEntry
-import as.thomwilliam.endpoints.handlers.conf.AbstractEndpointConfiguration
 
 
 class UnauthenticatedEndpointConfiguration extends AbstractEndpointConfiguration {

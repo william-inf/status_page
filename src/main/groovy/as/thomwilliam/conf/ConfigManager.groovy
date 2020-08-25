@@ -1,6 +1,7 @@
 package as.thomwilliam.conf
 
-import javax.inject.Singleton;
+import javax.inject.Singleton
+import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 class ConfigManager {
@@ -13,6 +14,13 @@ class ConfigManager {
 
     List<UrlEntry> getUrls() {
         return _properties.urls
+    }
+
+    ConcurrentHashMap<String, UrlEntry> getUrlMap() {
+        def map = new ConcurrentHashMap<String, UrlEntry>()
+        urls.each {map.put(it.name, it) }
+
+        return map
     }
 
     synchronized void persistConfig() {
