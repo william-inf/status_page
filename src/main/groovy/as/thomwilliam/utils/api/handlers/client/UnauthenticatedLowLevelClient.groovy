@@ -26,10 +26,4 @@ class UnauthenticatedLowLevelClient {
         return flowable as Flowable<HttpResponse<Map>>
     }
 
-    void closeStream() {
-        if (httpClient.isRunning()) {
-            httpClient.stop()
-        }
-    }
-
 }

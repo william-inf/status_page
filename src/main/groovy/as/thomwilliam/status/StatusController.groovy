@@ -9,7 +9,6 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.reactivex.Single
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 
 import javax.inject.Inject
 

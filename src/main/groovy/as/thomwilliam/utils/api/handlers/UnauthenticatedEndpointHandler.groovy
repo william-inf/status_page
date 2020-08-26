@@ -9,8 +9,8 @@ import io.micronaut.http.HttpResponse
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import javax.inject.Singleton;
 
-@Singleton
 @Slf4j
+@Singleton
 class UnauthenticatedEndpointHandler implements EndpointHandler {
 
     private final UnauthenticatedLowLevelClient client

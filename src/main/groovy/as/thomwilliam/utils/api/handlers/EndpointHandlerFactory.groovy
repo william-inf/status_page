@@ -1,8 +1,8 @@
 package as.thomwilliam.utils.api.handlers
 
 import as.thomwilliam.utils.api.EndpointAuthenticationType
-import groovy.util.logging.Slf4j
 import io.micronaut.context.ApplicationContext
+import groovy.util.logging.Slf4j
 import javax.inject.Singleton;
 
 @Slf4j
