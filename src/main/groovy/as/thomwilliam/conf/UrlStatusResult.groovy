@@ -7,6 +7,7 @@ class UrlStatusResult {
     HttpStatus status
     UrlEntry urlEntry
     Map body
+    Map values
     Date date
 
     static UrlStatusResult onSuccess(HttpResponse response, UrlEntry urlEntry) {
@@ -29,6 +30,11 @@ class UrlStatusResult {
 
     UrlStatusResult withBody(Map body) {
         this.body = body
+        return this
+    }
+
+    UrlStatusResult withValues(Map values) {
+        this.values = values
         return this
     }
 }

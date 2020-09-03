@@ -4,6 +4,8 @@ import as.thomwilliam.conf.UrlEntry
 import as.thomwilliam.conf.UrlStatusResult
 import as.thomwilliam.utils.api.handlers.EndpointHandler
 import as.thomwilliam.utils.api.handlers.EndpointHandlerFactory
+import as.thomwilliam.utils.response.handlers.ResponseHandler
+import as.thomwilliam.utils.response.handlers.ResponseHandlerFactory
 import groovy.util.logging.Slf4j
 import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +18,8 @@ import java.util.function.Supplier
 @Singleton
 class StatusService {
 
-    @Inject EndpointHandlerFactory handlerFactory
+    @Inject EndpointHandlerFactory endpointHandlerFactory
+    @Inject ResponseHandlerFactory responseHandlerFactory
 
     Maybe<UrlStatusResult> fetchResult(final UrlEntry entry) {
         log.info("Looking up status result for url ${entry.name}")
@@ -26,11 +29,17 @@ class StatusService {
             .onErrorComplete()
     }
 
-    private Supplier<UrlStatusResult> callUrlEntry(UrlEntry entry) {
-        EndpointHandler handler = handlerFactory.forType(entry.type)
+    private Supplier<UrlStatusResult> callUrlEntry(final UrlEntry entry) {
+        EndpointHandler endpointHandler = endpointHandlerFactory.forType(entry.type)
+        ResponseHandler responseHandler = responseHandlerFactory.forType(entry.response.type)
 
         return () -> {
-            handler.callEndpoint(entry)
+            UrlStatusResult result = endpointHandler.callEndpoint(entry)
+            Map values = responseHandler.handleResponse(result.urlEntry.response, result.body)
+
+            result.withValues(values)
+
+            return result
         }
     }
 }

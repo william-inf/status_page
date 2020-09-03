@@ -7,6 +7,7 @@ class UrlEntry {
     String name
     String path
     EndpointAuthenticationType type
+    UrlResponseConfig response
 
     Map toMap() {
         return [
