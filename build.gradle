@@ -27,12 +27,9 @@ dependencies {
     implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
-    implementation("io.micronaut.groovy:micronaut-hibernate-gorm")
     implementation 'com.google.code.gson:gson:2.6.2'
     developmentOnly("io.micronaut:micronaut-runtime-osx:$micronautVersion")
     runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("org.apache.tomcat:tomcat-jdbc")
     testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
     testImplementation("io.micronaut:micronaut-inject-groovy")
     testCompile "io.micronaut.test:micronaut-test-junit5:1.2.2"
