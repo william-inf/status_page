@@ -3,6 +3,8 @@ micronaut:
     name: status_page
   server:
     host: localhost
+    cors:
+      enabled: true
     netty:
       worker:
         threads: 5
@@ -10,10 +12,9 @@ micronaut:
         threads: 5
       childOptions:
         autoRead: true
-hibernate:
-  hbm2ddl:
-    auto: update
-  cache:
-    queries: false
-    use_second_level_cache: false
-    use_query_cache: false
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: "/**"
+        paths: "classpath:public"
